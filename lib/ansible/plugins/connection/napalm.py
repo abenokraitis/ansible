@@ -16,7 +16,7 @@ description:
     certain features to be enabled on network devices depending on the
     destination device operating system.  The connection plugin requires
     C(napalm) to be installed locally on the Ansible controller.
-version_added: "2.7"
+version_added: "2.8"
 requirements:
   - napalm
 options:
