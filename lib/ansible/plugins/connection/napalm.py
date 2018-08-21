@@ -43,8 +43,7 @@ options:
   network_os:
     description:
       - Configures the device platform network operating system.  This value is
-        used to load the correct terminal and cliconf plugins to communicate
-        with the remote device
+        used to load a napalm device abstraction.
     vars:
       - name: ansible_network_os
   remote_user:
@@ -179,12 +178,14 @@ class Connection(NetworkConnectionBase):
 
             host = self.get_option('host')
             self.napalm = driver(
-                hostname=self.get_option('host'),
+                hostname=host,
                 username=self.get_option('remote_user'),
                 password=self.get_option('password'),
                 timeout=self.get_option('persistent_command_timeout'),
             )
+
             self.napalm.open()
+
             self._implementation_plugins.append(self.napalm)
             display.vvvv('created napalm device for network_os %s' % self._network_os, host=host)
             self._connected = True
